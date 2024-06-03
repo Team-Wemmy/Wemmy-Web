@@ -22,7 +22,7 @@ function Section1() {
                             <P>
                                 임신부터 육아 여정까지 필요한 모든 혜택
                                 <br />
-                                위미에서 놓치지 마세요~!
+                                위미에서 놓치지 마세요!
                             </P>
                             <div style={{ display: "flex", flexDirection: "row", marginTop: "40px" }}>
                                 <AppBtn text="App Store" image={apple} backgroundColor="#FF7F92" />
