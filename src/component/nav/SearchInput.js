@@ -25,8 +25,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function SearchInput({ placeholder }) {
     return (
-        <div style={{ position: "relative", marginRight: "20px", display: "flex" }}>
-            <StyledInputBase placeholder={placeholder} />
+        <div>
+            <StyledInputBase placeholder={placeholder} sx={{ display: { xs: "none", md: "block" } }} />
         </div>
     );
 }

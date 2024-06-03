@@ -7,22 +7,22 @@ import iphone from "../../img/iPhone.png";
 function Section5() {
     return (
         <React.Fragment>
-            <section style={{ width: "100%", height: "1200px", display: "block", backgroundColor: "#FFF8DC" }}>
+            <section style={{ width: "100%", height: "1200px", display: "block", backgroundColor: "#FFF7F8" }}>
                 <DIV2>
                     <Image2 />
                     <div>
                         <div>
                             <P>
-                                <ColorText>혜택 추천</ColorText>
+                                <ColorText>커뮤니티</ColorText>
                             </P>
-                            <H1>나에게 해당하는</H1>
-                            <H1>모든 복지 혜택을 한 눈에</H1>
+                            <H1>근처 이웃들과</H1>
+                            <H1>소소한 이야기 나누기</H1>
                         </div>
                         <div>
                             <P>
-                                거주하는 자치구 및 여정(임신 또는 육아)를 기반으로
+                                동네 이웃들과 임신부터 육아, 소소한 이야기
                                 <br />
-                                맞춤형 혜택을 추천해줄게요.
+                                글도 남기고 공감과 댓글로 소통해보세요.
                             </P>
                         </div>
                     </div>
@@ -35,7 +35,6 @@ function Section5() {
 export default Section5;
 
 const DIV2 = styled.div`
-    width: 1370px;
     height: 1200px;
     position: relative;
     display: flex;
@@ -67,4 +66,8 @@ const Image2 = styled.div`
     background-image: url(${iphone});
     background-size: contain;
     background-repeat: no-repeat;
+
+    @media (max-width: 940px) {
+        display: none;
+    }
 `;

@@ -9,12 +9,11 @@ function Section3() {
         <React.Fragment>
             <section
                 style={{
-                    width: "100%",
                     height: "1200px",
-                    backgroundColor: "#FFF8DC",
+                    display: "block",
                 }}
             >
-                <DIV2>
+                <DIV2 style={{ backgroundColor: "#FFF8DC" }}>
                     <Image2 />
                     <div>
                         <div>
@@ -41,13 +40,13 @@ function Section3() {
 export default Section3;
 
 const DIV2 = styled.div`
-    width: 1500px;
     height: 1200px;
     position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    margin: 0 auto;
 `;
 
 const H1 = styled.h1`
@@ -73,4 +72,8 @@ const Image2 = styled.div`
     background-image: url(${iphone});
     background-size: contain;
     background-repeat: no-repeat;
+
+    @media (max-width: 940px) {
+        display: none;
+    }
 `;

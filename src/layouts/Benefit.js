@@ -20,7 +20,7 @@ function Benefit() {
                 <p style={{ color: "#50525F" }}>임신부터 육아 여정의 모든 헤택 정보를 제공해요!</p>
             </Div2>
             <Container maxWidth="lg">
-                <div>
+                <div style={{ marginBottom: "150px" }}>
                     <SelectBox />
                     <List />
                 </div>

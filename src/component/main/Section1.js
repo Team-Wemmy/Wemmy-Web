@@ -10,10 +10,10 @@ import AppBtn from "./AppBtn";
 function Section1() {
     return (
         <React.Fragment>
-            <div style={{ height: "1300px" }}>
-                <section style={{ height: "800px" }}>
-                    <Div1 style={{ backgroundColor: "#fff7f8" }}>
-                        <div style={{ marginBottom: "100px" }}>
+            <div style={{ height: "1000px" }}>
+                <section style={{ display: "block" }}>
+                    <Div1 style={{ width: "100%", backgroundColor: "#fff7f8" }}>
+                        <div>
                             <H1>
                                 임신 & 육아
                                 <br />
@@ -40,13 +40,12 @@ function Section1() {
 export default Section1;
 
 const Div1 = styled.div`
-    width: 1500px;
     height: 1000px;
     position: relative;
     display: flex;
-    align-items: center;
     justify-content: space-evenly;
-    padding: 0px 100px 300px 100px;
+    padding-top: 200px;
+    padding-bottom: 100px;
 `;
 
 const H1 = styled.h1`
@@ -66,5 +65,9 @@ const Image1 = styled.div`
     height: 650px;
     background-image: url(${logo_bgx});
     background-size: cover;
-    margin-top: 300px;
+    margin-top: 150px;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `;

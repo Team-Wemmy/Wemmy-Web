@@ -11,12 +11,13 @@ function Footer() {
                 height: "150px",
                 width: "1200px",
                 padding: "40px",
-                marginTop: "40px",
                 textAlign: "center",
                 borderTop: "1px solid #e7e7e7",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                margin: "0 auto",
+                alignItems: "center",
             }}
         >
             <Box sx={{ opacity: 0.6 }}>

@@ -13,22 +13,56 @@ const StyledNavLink = styled(NavLink)(({ theme }) => ({
     "&.active": {
         color: "#fc5a73",
     },
+    "@media (max-width: 550px)": {
+        display: "none",
+    },
 }));
 
 function Nav() {
     const searchPlaceholder = "혜택이나 자치구를 검색해보세요";
 
     return (
-        <AppBar component="nav" position="static" sx={{ boxShadow: 0, backgroundColor: "white" }}>
-            <Toolbar sx={{ display: "flex", backgroundColor: "white", ml: 24 }}>
-                <Box sx={{ mr: 5 }}>
+        <AppBar
+            component="div"
+            position="static"
+            sx={{
+                boxShadow: 0,
+                backgroundColor: "white",
+                width: "100%",
+                maxWidth: "100vw",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+            }}
+        >
+            <Toolbar
+                sx={{
+                    maxWidth: "1200px",
+                    display: "flex",
+                    backgroundColor: "white",
+                    justifyContent: "space-between",
+                    marginLeft: "0 auto",
+                }}
+            >
+                <Box sx={{ mr: "40px", display: "inline-flex" }}>
                     <NavLink to={"/"}>
                         <img src={logo} alt="Logo" width="40px" />
                     </NavLink>
                 </Box>
-
-                {/* NavLink 컴포넌트 재사용 */}
-                <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                <Box
+                    component="nav"
+                    sx={{
+                        "@media screen and (min-width: 768px)": {
+                            display: "flex",
+                            alignItems: "center",
+                            width: "100%",
+                            padding: "0 8rem 0 0",
+                            "@media (max-width: 950px)": {
+                                padding: "0",
+                            },
+                        },
+                    }}
+                >
                     <StyledNavLink to="/intro">위미?</StyledNavLink>
                     <StyledNavLink to="/benefit">혜택 정보</StyledNavLink>
                     <StyledNavLink to="/place">복지시설</StyledNavLink>

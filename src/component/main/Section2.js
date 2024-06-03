@@ -5,7 +5,7 @@ import styled from "styled-components";
 function Section2() {
     return (
         <React.Fragment>
-            <section style={{ height: "400px", display: "block" }}>
+            <section style={{ height: "600px", display: "block", marginTop: "250px" }}>
                 <DIV2 style={{ backgroundColor: "#fff" }}>
                     <H1>
                         나와 아이에게 필요한 <ColorText>모든 혜택</ColorText>
@@ -22,13 +22,14 @@ function Section2() {
 export default Section2;
 
 const DIV2 = styled.div`
-    width: 1500px;
-    height: 400px;
+    height: 600px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 0;
+    margin-top: 100px;
 `;
 
 const H1 = styled.h1`
