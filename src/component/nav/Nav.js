@@ -24,12 +24,10 @@ function Nav() {
     return (
         <AppBar
             component="div"
-            position="static"
+            position="fixed"
             sx={{
                 boxShadow: 0,
                 backgroundColor: "white",
-                width: "100%",
-                maxWidth: "100vw",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -37,11 +35,17 @@ function Nav() {
         >
             <Toolbar
                 sx={{
-                    maxWidth: "1200px",
+                    boxSizing: "border-box",
                     display: "flex",
                     backgroundColor: "white",
                     justifyContent: "space-between",
-                    marginLeft: "0 auto",
+                    margin: "0 auto",
+                    padding: "0.8rem 2rem",
+                    position: "relative",
+                    "@media screen and (min-width: 768px)": {
+                        maxWidth: "180rem",
+                        height: "3.4rem",
+                    },
                 }}
             >
                 <Box sx={{ mr: "40px", display: "inline-flex" }}>
@@ -55,8 +59,8 @@ function Nav() {
                         "@media screen and (min-width: 768px)": {
                             display: "flex",
                             alignItems: "center",
-                            width: "100%",
-                            padding: "0 8rem 0 0",
+                            width: "500px",
+                            padding: "0 20rem 0 0",
                             "@media (max-width: 950px)": {
                                 padding: "0",
                             },

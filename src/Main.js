@@ -6,7 +6,9 @@ function Main() {
     return (
         <div style={{ minHeight: "100vh" }}>
             <Nav />
-            <Outlet />
+            <div style={{ marginTop: "64px" }}>
+                <Outlet />
+            </div>
             <Footer />
         </div>
     );

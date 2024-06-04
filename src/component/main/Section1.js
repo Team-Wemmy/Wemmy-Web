@@ -10,29 +10,27 @@ import AppBtn from "./AppBtn";
 function Section1() {
     return (
         <React.Fragment>
-            <div style={{ height: "1000px" }}>
-                <section style={{ display: "block" }}>
-                    <Div1 style={{ width: "100%", backgroundColor: "#fff7f8" }}>
-                        <div>
-                            <H1>
-                                임신 & 육아
-                                <br />
-                                복지 혜택 모음.zip
-                            </H1>
-                            <P>
-                                임신부터 육아 여정까지 필요한 모든 혜택
-                                <br />
-                                위미에서 놓치지 마세요!
-                            </P>
-                            <div style={{ display: "flex", flexDirection: "row", marginTop: "40px" }}>
-                                <AppBtn text="App Store" image={apple} backgroundColor="#FF7F92" />
-                                <AppBtn text="Google Play" image={google} backgroundColor="#FF7F92" />
-                            </div>
+            <section style={{ display: "block", backgroundColor: "#fff7f8" }}>
+                <Div1 style={{ background: "#fff7f8" }}>
+                    <div>
+                        <H1>
+                            임신 & 육아
+                            <br />
+                            복지 혜택 모음.zip
+                        </H1>
+                        <P>
+                            임신부터 육아 여정까지 필요한 모든 혜택
+                            <br />
+                            위미에서 놓치지 마세요!
+                        </P>
+                        <div style={{ display: "flex", flexDirection: "row", marginTop: "40px" }}>
+                            <AppBtn text="App Store" image={apple} backgroundColor="#FF7F92" />
+                            <AppBtn text="Google Play" image={google} backgroundColor="#FF7F92" />
                         </div>
-                        <Image1 />
-                    </Div1>
-                </section>
-            </div>
+                    </div>
+                    <Image1 />
+                </Div1>
+            </section>
         </React.Fragment>
     );
 }
@@ -40,12 +38,13 @@ function Section1() {
 export default Section1;
 
 const Div1 = styled.div`
+    width: 1600px;
     height: 1000px;
     position: relative;
     display: flex;
     justify-content: space-evenly;
     padding-top: 200px;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 `;
 
 const H1 = styled.h1`
@@ -66,8 +65,4 @@ const Image1 = styled.div`
     background-image: url(${logo_bgx});
     background-size: cover;
     margin-top: 150px;
-
-    @media (max-width: 1000px) {
-        display: none;
-    }
 `;
