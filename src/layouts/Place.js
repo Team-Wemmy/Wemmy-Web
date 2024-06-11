@@ -5,6 +5,7 @@ import arrow from "../img/arrow.png";
 import homeIcon from "../img/homeIcon.png";
 
 import PlaceMap from "../component/place/Map";
+import PlaceCote from "../component/place/PlaceCote";
 
 function Place() {
     return (
@@ -18,7 +19,11 @@ function Place() {
                 <h1>복지시설</h1>
                 <p style={{ color: "#50525F" }}>내 주변 복지시설을 찾아볼까요?</p>
             </Div2>
-            <Container maxWidth="lg" sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+
+            <Container
+                maxWidth="lg"
+                sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+            >
                 <PlaceMap />
             </Container>
         </>

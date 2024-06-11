@@ -3,7 +3,7 @@ import { FilterAlt } from "@mui/icons-material";
 import { useState } from "react";
 
 function SelectBox() {
-    const FILTER_SELECT = ["전체", "임신", "출산", "육아"];
+    const FILTER_SELECT = ["전체", "임신", "육아"];
     const REGION_SELECT = [
         "서울 전체",
         "강남구",

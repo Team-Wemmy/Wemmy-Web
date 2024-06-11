@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 
-import iphone from "../../img/iPhone.png";
+import iphone from "../../img/section1.png";
 
 function Section3() {
     return (

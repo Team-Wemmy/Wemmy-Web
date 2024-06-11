@@ -1,13 +1,36 @@
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import styled from "styled-components";
+
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import arrow from "../img/arrow.png";
 import homeIcon from "../img/homeIcon.png";
 
-import SelectBox from "../component/benefit/SelectBox";
+import SelectBox1 from "../component/benefit/SelectBox1";
+import SelectBox2 from "../component/benefit/SelectBox2";
 import List from "../component/benefit/List";
+import Loading from "../component/Loading";
 
 function Benefit() {
+    const CITY = "서울특별시";
+    const [loading, setLoading] = useState(true);
+    const [benefits, setBenefits] = useState([]);
+    useEffect(() => {
+        const fetchBenefit = async () => {
+            try {
+                const resp = await axios.get(`${process.env.REACT_APP_API_URL}/benefit/web/list?city=${CITY}`);
+                setBenefits(resp.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+            setLoading(false);
+            console.log(loading);
+        };
+
+        fetchBenefit();
+    }, []);
+
     return (
         <>
             <Div2>
@@ -21,8 +44,25 @@ function Benefit() {
             </Div2>
             <Container maxWidth="lg">
                 <div style={{ marginBottom: "150px" }}>
-                    <SelectBox />
-                    <List />
+                    <SelectBox1 />
+                    <SelectBox2 />
+                    <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 12, md: 16 }}>
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <>
+                                {benefits.map((benefit) => (
+                                    <Grid item xs={2} sm={4} md={4} key={benefit.benefitId}>
+                                        <List
+                                            title={benefit.title}
+                                            district={benefit.district}
+                                            imageUrl={benefit.imageUrl}
+                                        />
+                                    </Grid>
+                                ))}
+                            </>
+                        )}
+                    </Grid>
                 </div>
             </Container>
         </>
