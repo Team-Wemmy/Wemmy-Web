@@ -1,3 +1,5 @@
+// layouts/Place.js
+
 import { Container } from "@mui/material";
 import styled from "styled-components";
 
@@ -5,7 +7,6 @@ import arrow from "../img/arrow.png";
 import homeIcon from "../img/homeIcon.png";
 
 import PlaceMap from "../component/place/Map";
-import PlaceCote from "../component/place/PlaceCote";
 
 function Place() {
     return (
