@@ -1,3 +1,5 @@
+// src/layouts/Benefit.js
+
 import { Container, Grid } from "@mui/material";
 import styled from "styled-components";
 
@@ -16,6 +18,8 @@ function Benefit() {
     const CITY = "서울특별시";
     const [loading, setLoading] = useState(true);
     const [benefits, setBenefits] = useState([]);
+    const [filter, setFilter] = useState("전체");
+
     useEffect(() => {
         const fetchBenefit = async () => {
             try {
@@ -31,6 +35,13 @@ function Benefit() {
         fetchBenefit();
     }, []);
 
+    const filteredBenefits = benefits.filter((benefit) => {
+        if (filter === "전체") {
+            return true;
+        }
+        return benefit.type === filter;
+    });
+
     return (
         <>
             <Div2>
@@ -44,19 +55,20 @@ function Benefit() {
             </Div2>
             <Container maxWidth="lg">
                 <div style={{ marginBottom: "150px" }}>
-                    <SelectBox1 />
+                    <SelectBox1 filter={filter} setFilter={setFilter} />
                     <SelectBox2 />
                     <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 12, md: 16 }}>
                         {loading ? (
                             <Loading />
                         ) : (
                             <>
-                                {benefits.map((benefit) => (
+                                {filteredBenefits.map((benefit) => (
                                     <Grid item xs={2} sm={4} md={4} key={benefit.benefitId}>
                                         <List
                                             title={benefit.title}
                                             district={benefit.district}
                                             imageUrl={benefit.imageUrl}
+                                            type={benefit.type}
                                         />
                                     </Grid>
                                 ))}

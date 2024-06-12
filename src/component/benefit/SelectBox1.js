@@ -1,9 +1,11 @@
+// src/component/benefit/Selectbox1.js
+
 import { Button, FormControl, MenuItem, Select } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
 import { useState } from "react";
 
-function SelectBox() {
-    const FILTER_SELECT = ["전체", "임신", "육아"];
+function SelectBox({ filter, setFilter }) {
+    const FILTER_SELECT = ["전체", "임산부", "영유아"];
     const REGION_SELECT = [
         "서울 전체",
         "강남구",
@@ -19,8 +21,6 @@ function SelectBox() {
         "동대문구",
         "동작구",
     ];
-
-    const [filter, setFilter] = useState("전체");
     const [region, setRegion] = useState("서울 전체");
     const [seoul, setSeoul] = useState("서울특별시");
 
