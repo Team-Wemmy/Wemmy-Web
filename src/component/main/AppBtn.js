@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function AppBtn({ text, image, backgroundColor }) {
+    const [isActive, setIsActive] = useState(false);
+
     const getFontColor = (backgroundColor) => {
         if (backgroundColor === "#E4E5ED") {
             return "#303239";
@@ -9,12 +13,22 @@ function AppBtn({ text, image, backgroundColor }) {
 
     const fontColor = getFontColor(backgroundColor);
 
+    const handleMouseDown = () => {
+        setIsActive(true);
+    };
+
+    const handleMouseUp = () => {
+        setIsActive(false);
+    };
+
     return (
         <button
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
             style={{
                 height: "50px",
                 width: "190px",
-                backgroundColor: backgroundColor,
+                backgroundColor: isActive ? "#FD5B73" : backgroundColor,
                 color: fontColor,
                 fontSize: "16px",
                 display: "flex",
