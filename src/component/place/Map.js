@@ -128,20 +128,24 @@ function KakaoMap() {
             </>
         );
     };
+
+    const handleButtonClick = (selectedCategory) => {
+        setCategory(selectedCategory);
+    };
     return (
         <>
             <DIV1>
-                <BTN onClick={() => setCategory("산후조리원")}>
-                    <BsHeartPulseFill color="#FD5B73" size={21} /> 산후조리원
+                <BTN onClick={() => handleButtonClick("산후조리원")} selected={category === "산후조리원"}>
+                    <BsHeartPulseFill color={category === "산후조리원" ? "white" : "#FD5B73"} size={21} /> 산후조리원
                 </BTN>
-                <BTN onClick={() => setCategory("육아시설")}>
-                    <PiBabyFill color="#FD5B73" size={25} /> 육아 시설
+                <BTN onClick={() => handleButtonClick("육아시설")} selected={category === "육아시설"}>
+                    <PiBabyFill color={category === "육아시설" ? "white" : "#FD5B73"} size={25} /> 육아 시설
                 </BTN>
-                <BTN onClick={() => setCategory("의료시설")}>
-                    <MdLocalHospital color="#FD5B73" size={25} /> 의료 시설
+                <BTN onClick={() => handleButtonClick("의료시설")} selected={category === "의료시설"}>
+                    <MdLocalHospital color={category === "의료시설" ? "white" : "#FD5B73"} size={25} /> 의료 시설
                 </BTN>
-                <BTN onClick={() => setCategory("행정시설")}>
-                    <MdHomeWork color="#FD5B73" size={25} /> 행정 시설
+                <BTN onClick={() => handleButtonClick("행정시설")} selected={category === "행정시설"}>
+                    <MdHomeWork color={category === "행정시설" ? "white" : "#FD5B73"} size={25} /> 행정 시설
                 </BTN>
             </DIV1>
             <Map
@@ -183,9 +187,9 @@ const BTN = styled.button`
     height: 48px;
     border: 1px solid #e4e5ed;
     border-radius: 13px;
-    background: none;
     font-size: 18px;
-    color: #50525f;
+    background-color: ${(props) => (props.selected ? "#FD5B73" : "white")};
+    color: ${(props) => (props.selected ? "white" : "#303239")};
     display: flex;
     align-items: center;
     justify-content: space-evenly;
