@@ -150,7 +150,7 @@ function KakaoMap() {
             </DIV1>
             <Map
                 center={{ lat: 37.4575519359473, lng: 126.897593557221 }}
-                style={{ width: "1100px", height: "500px", margin: "13px 50px" }}
+                style={{ width: "1100px", height: "800px", margin: "13px 50px" }}
                 level={3}
             >
                 {filteredPositions.map((position) => (

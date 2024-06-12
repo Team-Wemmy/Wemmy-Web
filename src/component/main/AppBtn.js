@@ -28,7 +28,7 @@ function AppBtn({ text, image, backgroundColor }) {
             style={{
                 height: "50px",
                 width: "190px",
-                backgroundColor: isActive ? "#FD5B73" : backgroundColor,
+                backgroundColor: isActive ? "#D0D3E1" : backgroundColor,
                 color: fontColor,
                 fontSize: "16px",
                 display: "flex",
