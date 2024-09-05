@@ -29,7 +29,6 @@ function Benefit() {
                 console.error("Error fetching data:", error);
             }
             setLoading(false);
-            console.log(loading);
         };
 
         fetchBenefit();
@@ -40,6 +39,20 @@ function Benefit() {
             return true;
         }
         return benefit.type === filter;
+    });
+
+    // 이름순으로 정렬
+    const sortedBenefits = filteredBenefits.sort((a, b) => {
+        const titleA = a.title.toUpperCase(); // 대소문자 구분 없이 비교하기 위해 대문자로 변환
+        const titleB = b.title.toUpperCase();
+
+        if (titleA < titleB) {
+            return -1;
+        }
+        if (titleA > titleB) {
+            return 1;
+        }
+        return 0;
     });
 
     return (
@@ -62,7 +75,7 @@ function Benefit() {
                             <Loading />
                         ) : (
                             <>
-                                {filteredBenefits.map((benefit) => (
+                                {sortedBenefits.map((benefit) => (
                                     <Grid item xs={2} sm={4} md={4} key={benefit.benefitId}>
                                         <List
                                             title={benefit.title}
