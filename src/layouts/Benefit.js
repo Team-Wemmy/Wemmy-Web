@@ -34,6 +34,13 @@ function Benefit() {
         fetchBenefit();
     }, []);
 
+    const formatImageUrl = (url) => {
+        if (!url.includes("?raw=true")) {
+            return `${url}?raw=true`;
+        }
+        return url;
+    };
+
     const filteredBenefits = benefits.filter((benefit) => {
         if (filter === "전체") {
             return true;
@@ -80,7 +87,7 @@ function Benefit() {
                                         <List
                                             title={benefit.title}
                                             district={benefit.district}
-                                            imageUrl={benefit.imageUrl}
+                                            imageUrl={formatImageUrl(benefit.imageUrl)}
                                             type={benefit.type}
                                         />
                                     </Grid>
