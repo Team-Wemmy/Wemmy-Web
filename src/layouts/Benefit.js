@@ -1,6 +1,6 @@
 // src/layouts/Benefit.js
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Pagination } from "@mui/material";
 import styled from "styled-components";
 
 import { useState, useEffect } from "react";
@@ -20,6 +20,8 @@ function Benefit() {
     const [benefits, setBenefits] = useState([]);
     const [filter, setFilter] = useState("전체");
     const [district, setDistrict] = useState("서울 전체");
+    const [currentPage, setCurrentPage] = useState(1);
+    const benefitsPerPage = 20;
 
     useEffect(() => {
         const fetchBenefit = async () => {
@@ -35,13 +37,6 @@ function Benefit() {
         fetchBenefit();
     }, []);
 
-    const formatImageUrl = (url) => {
-        if (!url.includes("?raw=true")) {
-            return `${url}?raw=true`;
-        }
-        return url;
-    };
-
     const filteredBenefits = benefits.filter((benefit) => {
         const matchesFilter = filter === "전체" || benefit.type === filter;
         const matchesDistrict = district === "서울 전체" || benefit.district === district;
@@ -52,15 +47,18 @@ function Benefit() {
     const sortedBenefits = filteredBenefits.sort((a, b) => {
         const titleA = a.title.toUpperCase(); // 대소문자 구분 없이 비교하기 위해 대문자로 변환
         const titleB = b.title.toUpperCase();
-
-        if (titleA < titleB) {
-            return -1;
-        }
-        if (titleA > titleB) {
-            return 1;
-        }
-        return 0;
+        return titleA.localeCompare(titleB);
     });
+
+    const indexOfLastBenefit = currentPage * benefitsPerPage;
+    const indexOfFirstBenefit = indexOfLastBenefit - benefitsPerPage;
+    const currentBenefits = sortedBenefits.slice(indexOfFirstBenefit, indexOfLastBenefit);
+
+    const totalPages = Math.ceil(sortedBenefits.length / benefitsPerPage);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     return (
         <>
@@ -82,12 +80,12 @@ function Benefit() {
                             <Loading />
                         ) : (
                             <>
-                                {sortedBenefits.map((benefit) => (
+                                {currentBenefits.map((benefit) => (
                                     <Grid item xs={2} sm={4} md={4} key={benefit.benefitId}>
                                         <List
                                             title={benefit.title}
                                             district={benefit.district}
-                                            imageUrl={formatImageUrl(benefit.imageUrl)}
+                                            imageUrl={benefit.imageUrl}
                                             type={benefit.type}
                                         />
                                     </Grid>
@@ -95,6 +93,9 @@ function Benefit() {
                             </>
                         )}
                     </Grid>
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
+                    </div>
                 </div>
             </Container>
         </>
