@@ -21,7 +21,7 @@ function Benefit() {
     const [filter, setFilter] = useState("전체");
     const [district, setDistrict] = useState("서울 전체");
     const [currentPage, setCurrentPage] = useState(1);
-    const benefitsPerPage = 20;
+    const benefitsPerPage = 16;
 
     useEffect(() => {
         const fetchBenefit = async () => {

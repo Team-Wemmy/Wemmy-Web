@@ -8,11 +8,13 @@ import AdminMain from "./layouts/admin/AdminMain";
 import Admin from "./layouts/admin/index";
 import BenefitsList from "./layouts/admin/BenefitsList";
 import Apply from "./layouts/admin/Apply";
+import ScrollToTop from "./component/ScrollToTop";
 import "./css/App.css";
 
 function App() {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <Routes>
                 <Route path="/" element={<Main />}>
                     <Route index element={<Home />} />
