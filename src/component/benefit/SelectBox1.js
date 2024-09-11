@@ -4,9 +4,9 @@ import { Button, FormControl, MenuItem, Select } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
 import { useState } from "react";
 
-function SelectBox({ filter, setFilter }) {
+function SelectBox({ filter, setFilter, district, setDistrict }) {
     const FILTER_SELECT = ["전체", "임산부", "영유아"];
-    const REGION_SELECT = [
+    const DISTRICT_SELECT = [
         "서울 전체",
         "강남구",
         "강동구",
@@ -20,16 +20,28 @@ function SelectBox({ filter, setFilter }) {
         "도봉구",
         "동대문구",
         "동작구",
+        "마포구",
+        "서대문구",
+        "서초구",
+        "성동구",
+        "성북구",
+        "송파구",
+        "양천구",
+        "영등포구",
+        "용산구",
+        "은평구",
+        "종로구",
+        "중구",
+        "중랑구",
     ];
-    const [region, setRegion] = useState("서울 전체");
     const [seoul, setSeoul] = useState("서울특별시");
 
     const handleFilterChange = (event) => {
         setFilter(event.target.value);
     };
 
-    const handleRegionChange = (event) => {
-        setRegion(event.target.value);
+    const handleDistrictChange = (event) => {
+        setDistrict(event.target.value);
     };
 
     const handleSeoulChange = (event) => {
@@ -76,16 +88,11 @@ function SelectBox({ filter, setFilter }) {
             </FormControl>
 
             <FormControl sx={{ m: 1, minWidth: 130 }} size="small">
-                <Select
-                    labelId="demo-simple-select-disabled-label"
-                    defaultValue={region}
-                    value={region}
-                    onChange={handleRegionChange}
-                >
-                    {REGION_SELECT.map((region, idx) => {
+                <Select defaultValue={district} value={district} onChange={handleDistrictChange}>
+                    {DISTRICT_SELECT.map((district, idx) => {
                         return (
-                            <MenuItem key={idx} value={region}>
-                                {region}
+                            <MenuItem key={idx} value={district}>
+                                {district}
                             </MenuItem>
                         );
                     })}

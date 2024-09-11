@@ -19,6 +19,7 @@ function Benefit() {
     const [loading, setLoading] = useState(true);
     const [benefits, setBenefits] = useState([]);
     const [filter, setFilter] = useState("전체");
+    const [district, setDistrict] = useState("서울 전체");
 
     useEffect(() => {
         const fetchBenefit = async () => {
@@ -42,10 +43,9 @@ function Benefit() {
     };
 
     const filteredBenefits = benefits.filter((benefit) => {
-        if (filter === "전체") {
-            return true;
-        }
-        return benefit.type === filter;
+        const matchesFilter = filter === "전체" || benefit.type === filter;
+        const matchesDistrict = district === "서울 전체" || benefit.district === district;
+        return matchesFilter && matchesDistrict;
     });
 
     // 이름순으로 정렬
@@ -75,7 +75,7 @@ function Benefit() {
             </Div2>
             <Container maxWidth="lg">
                 <div style={{ marginBottom: "150px" }}>
-                    <SelectBox1 filter={filter} setFilter={setFilter} />
+                    <SelectBox1 filter={filter} setFilter={setFilter} district={district} setDistrict={setDistrict} />
                     <SelectBox2 />
                     <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 12, md: 16 }}>
                         {loading ? (
