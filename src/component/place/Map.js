@@ -1,11 +1,12 @@
 // component/place/Map.js
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Map, MapMarker, useMap, CustomOverlayMap } from "react-kakao-maps-sdk";
 
 import adminIcon from "../../img/adminplace.png";
 import hospitalIcon from "../../img/hospital.png";
 import babyIcon from "../../img/babyplace.png";
+import geoMarker from "../../img/geomarker.png";
 
 import styled from "styled-components";
 
@@ -18,6 +19,44 @@ import { GoClockFill } from "react-icons/go";
 
 function KakaoMap() {
     const [category, setCategory] = useState(null);
+    const [state, setState] = useState({
+        center: {
+            lat: 33.450701,
+            lng: 126.570667,
+        },
+        errMsg: null,
+        isLoading: true,
+    });
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setState((prev) => ({
+                        ...prev,
+                        center: {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        },
+                        isLoading: false,
+                    }));
+                },
+                (err) => {
+                    setState((prev) => ({
+                        ...prev,
+                        errMsg: err.message,
+                        isLoading: false,
+                    }));
+                }
+            );
+        } else {
+            setState((prev) => ({
+                ...prev,
+                errMsg: "현재 위치 사용할 수 없음",
+                isLoading: false,
+            }));
+        }
+    }, []);
 
     const positions = [
         {
@@ -148,11 +187,13 @@ function KakaoMap() {
                     <MdHomeWork color={category === "행정시설" ? "white" : "#FD5B73"} size={25} /> 행정 시설
                 </BTN>
             </DIV1>
-            <Map
-                center={{ lat: 37.4575519359473, lng: 126.897593557221 }}
-                style={{ width: "1100px", height: "800px", margin: "13px 50px" }}
-                level={3}
-            >
+            <Map center={state.center} style={{ width: "1100px", height: "800px", margin: "13px 50px" }} level={3}>
+                {!state.isLoading && (
+                    <MapMarker
+                        image={{ src: geoMarker, size: { width: 30, height: 30 } }}
+                        position={state.center}
+                    ></MapMarker>
+                )}
                 {filteredPositions.map((position) => (
                     <EventMarkerContainer
                         style={{ border: "tranparent" }}
@@ -166,6 +207,9 @@ function KakaoMap() {
                     />
                 ))}
             </Map>
+            <ControlBox>
+                <ControlBtn />
+            </ControlBox>
         </>
     );
 }
@@ -223,4 +267,27 @@ const InfoSmallText = styled.p`
     font-size: 11px;
     color: #7f8295;
     margin: 7px 0 0 10px;
+`;
+
+const ControlBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    padding: 10px;
+`;
+
+const ControlBtn = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    box-shadow: 8px;
 `;
