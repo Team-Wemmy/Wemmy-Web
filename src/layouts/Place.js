@@ -36,7 +36,7 @@ export default Place;
 const Div2 = styled.div`
     width: 100%;
     height: 300px;
-    background-color: #ffe6ea;
+    background-color: #e1efff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +46,6 @@ const Div2 = styled.div`
 const Div3 = styled.div`
     width: 130px;
     height: 30px;
-    background-color: #ffe6ea;
     display: flex;
     flex-direction: row;
     align-items: center;

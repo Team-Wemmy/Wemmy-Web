@@ -1,6 +1,7 @@
 // src/component/benefit/Selectbox2.js
 
-import { Box, FormControl, MenuItem, Select } from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
+import { List, ListItem, MenuItem, Button } from "@mui/material";
 import { useState } from "react";
 
 function SelectBox2() {
@@ -13,9 +14,9 @@ function SelectBox2() {
 
     return (
         <>
-            <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
-                <FormControl sx={{ m: 1, minWidth: 130, marginBottom: "30px" }} size="small">
-                    <Select
+            <List sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
+                <ListItem sx={{ m: 1, minWidth: 130, marginBottom: "30px" }} size="small">
+                    <Button
                         labelId="demo-simple-select-disabled-label"
                         defaultValue={sort}
                         value={sort}
@@ -23,14 +24,14 @@ function SelectBox2() {
                     >
                         {SORT.map((region, idx) => {
                             return (
-                                <MenuItem key={idx} value={region}>
+                                <CheckBox key={idx} value={region}>
                                     {region}
-                                </MenuItem>
+                                </CheckBox>
                             );
                         })}
-                    </Select>
-                </FormControl>
-            </Box>
+                    </Button>
+                </ListItem>
+            </List>
         </>
     );
 }

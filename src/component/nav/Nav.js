@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AppBar, Box, Toolbar } from "@mui/material";
-import logo from "../../img/wemmy_logo.png";
+import logo from "../../img/wemmy.png";
 import { styled } from "@mui/material/styles";
 import SearchInput from "./SearchInput"; // StyledInputBase와 관련된 스타일을 별도 파일로 분리
 
@@ -50,7 +50,7 @@ function Nav() {
             >
                 <Box sx={{ mr: "40px", display: "inline-flex" }}>
                     <NavLink to={"/"}>
-                        <img src={logo} alt="Logo" width="40px" />
+                        <img src={logo} alt="Logo" width="100px" />
                     </NavLink>
                 </Box>
                 <Box

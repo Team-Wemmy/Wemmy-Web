@@ -9,24 +9,24 @@ import axios from "axios";
 import arrow from "../img/arrow.png";
 import homeIcon from "../img/homeIcon.png";
 
-import SelectBox1 from "../component/benefit/SelectBox1";
+import FilterBox from "../component/benefit/FilterBox";
 import SelectBox2 from "../component/benefit/SelectBox2";
-import List from "../component/benefit/List";
+import BenefitList from "../component/benefit/BenefitList";
 import Loading from "../component/Loading";
 
 function Benefit() {
     const CITY = "서울특별시";
     const [loading, setLoading] = useState(true);
     const [benefits, setBenefits] = useState([]);
-    const [filter, setFilter] = useState("전체");
+    const [type, setType] = useState("");
     const [district, setDistrict] = useState("서울 전체");
     const [currentPage, setCurrentPage] = useState(1);
-    const benefitsPerPage = 16;
+    const benefitsPerPage = 15;
 
     useEffect(() => {
         const fetchBenefit = async () => {
             try {
-                const resp = await axios.get(`${process.env.REACT_APP_API_URL}/benefit/web/list?city=${CITY}`);
+                const resp = await axios.get(`${process.env.REACT_APP_API_URL}/benefit/v2/web/list?city=${CITY}`);
                 setBenefits(resp.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -38,7 +38,7 @@ function Benefit() {
     }, []);
 
     const filteredBenefits = benefits.filter((benefit) => {
-        const matchesFilter = filter === "전체" || benefit.type === filter;
+        const matchesFilter = type === "" || benefit.type === type;
         const matchesDistrict = district === "서울 전체" || benefit.district === district;
         return matchesFilter && matchesDistrict;
     });
@@ -71,31 +71,37 @@ function Benefit() {
                 <h1>혜택 정보</h1>
                 <p style={{ color: "#50525F" }}>임신부터 육아 여정의 모든 헤택 정보를 제공해요!</p>
             </Div2>
-            <Container maxWidth="lg">
-                <div style={{ marginBottom: "150px" }}>
-                    <SelectBox1 filter={filter} setFilter={setFilter} district={district} setDistrict={setDistrict} />
-                    <SelectBox2 />
-                    <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 12, md: 16 }}>
-                        {loading ? (
-                            <Loading />
-                        ) : (
-                            <>
-                                {currentBenefits.map((benefit) => (
-                                    <Grid item xs={2} sm={4} md={4} key={benefit.benefitId}>
-                                        <List
-                                            title={benefit.title}
-                                            district={benefit.district}
-                                            imageUrl={benefit.imageUrl}
-                                            type={benefit.type}
-                                        />
-                                    </Grid>
-                                ))}
-                            </>
-                        )}
-                    </Grid>
-                    <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-                        <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
-                    </div>
+            <Container
+                maxWidth="xl"
+                sx={{ marginBottom: "150px", display: "flex", alignItems: "center", flexDirection: "column" }}
+            >
+                <FilterBox type={type} setType={setType} district={district} setDistrict={setDistrict} />
+                <Grid
+                    container
+                    minWidth="xl"
+                    spacing={{ xs: 1, md: 2 }}
+                    columns={{ xs: 2, sm: 10, md: 15 }}
+                    style={{ marginTop: 50, display: "flex", justifyContent: "space-between" }}
+                >
+                    {loading ? (
+                        <Loading />
+                    ) : (
+                        <>
+                            {currentBenefits.map((benefit) => (
+                                <Grid item xs={2} sm={3} md={5} lg={5} key={benefit.benefitId}>
+                                    <BenefitList
+                                        title={benefit.title}
+                                        district={benefit.district}
+                                        imageUrl={benefit.imageUrl}
+                                        type={benefit.type}
+                                    />
+                                </Grid>
+                            ))}
+                        </>
+                    )}
+                </Grid>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                    <Pagination count={totalPages} page={currentPage} onChange={handlePageChange} />
                 </div>
             </Container>
         </>
