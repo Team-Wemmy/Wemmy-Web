@@ -1,4 +1,4 @@
-import { Box, Button, List, ListItem, Checkbox, ListItemButton, ListItemText } from "@mui/material";
+import { Box, Button, List, ListItem, Checkbox, ListItemText } from "@mui/material";
 import { useEffect } from "react";
 
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -92,7 +92,7 @@ export default function DistrictFilter({ district, setDistrict }) {
             >
                 {DISTRICT_SELECT.map((districtName, i) => {
                     return (
-                        <ListItem key={i} sx={{ width: "15%", height: "35px", color: "#7F8295" }}>
+                        <ListItem key={i} sx={{ width: "18%", height: "35px", color: "#7F8295" }}>
                             <Checkbox
                                 value={districtName}
                                 checked={district.includes(districtName)}

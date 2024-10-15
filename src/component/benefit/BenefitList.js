@@ -64,7 +64,7 @@ function List({ title, type, imageUrl, group }) {
                         sx={{
                             display: "flex",
                             flexDirection: "row",
-                            marginTop: "10px",
+                            margin: "20px 0",
                         }}
                     >
                         <img
@@ -96,7 +96,7 @@ function List({ title, type, imageUrl, group }) {
                         </Box>
                     </Box>
                 </Box>
-                <Box sx={{ marginTop: "15px", marginLeft: "3px" }}>
+                <Box sx={{ marginLeft: "3px" }}>
                     <Typography sx={{ color: "#7F8295", fontSize: "11px" }}>상시 신청</Typography>
                 </Box>
             </Box>

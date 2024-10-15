@@ -77,8 +77,8 @@ function Benefit() {
                 <FilterBox type={type} setType={setType} district={district} setDistrict={setDistrict} />
                 <Grid
                     container
-                    minWidth="xl"
-                    spacing={{ xs: 1, md: 2 }}
+                    maxWidth="lg"
+                    spacing={{ xs: 1, md: 3 }}
                     columns={{ xs: 2, sm: 10, md: 15 }}
                     style={{ marginTop: 50, display: "flex", justifyContent: "space-between" }}
                 >

@@ -20,7 +20,7 @@ function FilterBox({ type, setType, district, setDistrict }) {
     };
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", marginTop: "60px", width: "1300px" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", marginTop: "60px", width: "1100px" }}>
             <List
                 sx={{
                     display: "flex",

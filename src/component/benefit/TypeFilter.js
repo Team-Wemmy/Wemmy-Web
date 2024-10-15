@@ -51,7 +51,7 @@ export default function TypeFilter({ type, setType }) {
                         <ListItem key={i} sx={{ width: "260px", padding: 0, color: "#7F8295" }}>
                             <ListItemButton
                                 onClick={handleToggle(item)}
-                                sx={{ padding: 0, margin: 0, justifyContent: "flex-start" }}
+                                sx={{ padding: 0, marginLeft: "20px", justifyContent: "flex-start" }}
                             >
                                 <Checkbox
                                     checked={checked.includes(item)}
