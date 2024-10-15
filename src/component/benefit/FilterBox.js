@@ -1,20 +1,8 @@
 // src/component/benefit/Selectbox1.js
 
-import {
-    Box,
-    Button,
-    FormControl,
-    List,
-    ListItem,
-    MenuItem,
-    Select,
-    styled,
-    Divider,
-    Checkbox,
-    ListItemButton,
-    ListItemText,
-} from "@mui/material";
+import { Box, Button, List, ListItem, Typography } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 import SearchIcon from "@mui/icons-material/Search";
 import ReplayIcon from "@mui/icons-material/Replay";
@@ -22,7 +10,7 @@ import { useState } from "react";
 import DistrictFilter from "./DistrictFilter";
 import TypeFilter from "./TypeFilter";
 
-function SelectBox({ type, setType, district, setDistrict }) {
+function FilterBox({ type, setType, district, setDistrict }) {
     const FILTER_SELECT = ["지역 선택", "분야 선택"];
 
     const [activeBox, setActiveBox] = useState(null);
@@ -44,14 +32,48 @@ function SelectBox({ type, setType, district, setDistrict }) {
                 <Box sx={{ display: "flex", flexDirection: "row" }}>
                     {FILTER_SELECT.map((filter, idx) => {
                         return (
-                            <ListItem sx={{ width: "350px", height: "60px", border: "1px solid #E4E5ED" }}>
+                            <ListItem
+                                sx={{
+                                    width: "350px",
+                                    height: "60px",
+                                    border: activeBox === idx ? "1px solid #000" : "1px solid #E4E5ED",
+                                }}
+                            >
                                 <Button
                                     key={idx}
                                     onClick={() => handleFilterClick(idx)}
-                                    sx={{ color: "black", ":hover": { backgroundColor: "#fff" } }}
+                                    sx={{
+                                        width: "100%",
+                                        color: activeBox === idx ? "black" : "#7F8295",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        ":hover": { backgroundColor: "#fff" },
+                                    }}
                                 >
                                     {filter}
-                                    <ArrowDropDownIcon sx={{ marginLeft: "200px" }} />
+                                    {activeBox === idx ? (
+                                        <Typography
+                                            sx={{
+                                                fontSize: "12px",
+                                                color: "#7F8295",
+                                                display: "flex",
+                                                alignItems: "center",
+                                            }}
+                                        >
+                                            <span
+                                                style={{
+                                                    fontSize: "20px",
+                                                    color: "#FD5B73",
+                                                    marginRight: "5px",
+                                                    marginTop: "5px",
+                                                }}
+                                            >
+                                                *
+                                            </span>{" "}
+                                            중복 선택 가능
+                                        </Typography>
+                                    ) : null}
+                                    {activeBox === idx ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                                 </Button>
                             </ListItem>
                         );
@@ -88,4 +110,4 @@ function SelectBox({ type, setType, district, setDistrict }) {
     );
 }
 
-export default SelectBox;
+export default FilterBox;

@@ -1,10 +1,14 @@
 import { Box, List, ListItem, Checkbox, ListItemButton, ListItemText } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function TypeFilter(type, setType) {
+export default function TypeFilter({ type, setType }) {
     const TYPE_SELECT = ["예비부부", "신혼부부", "홀벌이", "임신계획", "난임", "임산부", "출산후"];
 
     const [checked, setChecked] = useState([]);
+
+    useEffect(() => {
+        setChecked(type);
+    }, [type]);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -17,6 +21,7 @@ export default function TypeFilter(type, setType) {
         }
 
         setChecked(newChecked);
+        setType(newChecked);
     };
 
     return (
@@ -34,24 +39,31 @@ export default function TypeFilter(type, setType) {
         >
             <List
                 sx={{
-                    height: "200px",
+                    height: "180px",
                     width: "850px",
                     display: "flex",
                     flexDirection: "row",
                     flexWrap: "wrap",
-                    alignItems: "center",
-                    marginLeft: "30px",
                 }}
             >
-                {TYPE_SELECT.map((type, i) => {
+                {TYPE_SELECT.map((item, i) => {
                     return (
-                        <ListItem key={i} sx={{ width: "260px", padding: 0 }}>
+                        <ListItem key={i} sx={{ width: "260px", padding: 0, color: "#7F8295" }}>
                             <ListItemButton
-                                onClick={handleToggle(type)}
+                                onClick={handleToggle(item)}
                                 sx={{ padding: 0, margin: 0, justifyContent: "flex-start" }}
                             >
-                                <Checkbox checked={checked.includes(type)} />
-                                <ListItemText primary={type} />
+                                <Checkbox
+                                    checked={checked.includes(item)}
+                                    sx={{
+                                        justifyContent: "flex-start",
+                                        color: "#AEB2C6",
+                                        "&.Mui-checked": {
+                                            color: "#FD5B73",
+                                        },
+                                    }}
+                                />
+                                <ListItemText primary={item} />
                             </ListItemButton>
                         </ListItem>
                     );

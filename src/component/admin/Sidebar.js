@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Drawer, Box, List, ListItem, ListItemButton, ListItemText, Collapse, Divider } from "@mui/material";
+import { Drawer, Box, List, ListItem, ListItemButton, ListItemText, Collapse } from "@mui/material";
 import admin_logo from "../../img/wemmy_admin.png";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";

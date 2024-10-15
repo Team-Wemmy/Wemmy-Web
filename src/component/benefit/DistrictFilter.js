@@ -1,9 +1,9 @@
 import { Box, Button, List, ListItem, Checkbox, ListItemButton, ListItemText } from "@mui/material";
-import { useState } from "react";
+import { useEffect } from "react";
 
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
-export default function DistrictFilter(district, setDistrict) {
+export default function DistrictFilter({ district, setDistrict }) {
     const DISTRICT_SELECT = [
         "서울 전체",
         "강남구",
@@ -32,8 +32,37 @@ export default function DistrictFilter(district, setDistrict) {
         "중구",
         "중랑구",
     ];
+
+    useEffect(() => {
+        if (district.length === 0) {
+            setDistrict(["서울 전체"]);
+        }
+    }, [district, setDistrict]);
+
+    const handleCheckBox = (event) => {
+        const { value, checked } = event.target;
+        if (value === "서울 전체") {
+            if (checked) {
+                setDistrict(["서울 전체"]);
+            } else {
+                setDistrict([]);
+            }
+        } else {
+            if (checked) {
+                setDistrict((prev) => {
+                    if (prev.includes("서울 전체")) {
+                        return [...prev.filter((item) => item !== "서울 전체"), value];
+                    }
+                    return [...prev, value];
+                });
+            } else {
+                setDistrict((prev) => prev.filter((item) => item !== value));
+            }
+        }
+    };
+
     return (
-        <Box sx={{ border: "1px solid #000", margin: 0, height: "300px", display: "flex", flexDirection: "row" }}>
+        <Box sx={{ border: "1px solid #000", margin: 0, height: "280px", display: "flex", flexDirection: "row" }}>
             <Button
                 sx={{
                     width: "250px",
@@ -50,24 +79,33 @@ export default function DistrictFilter(district, setDistrict) {
                 서울
                 <KeyboardArrowRightIcon />
             </Button>
-            <hr />
+            <hr style={{ opacity: 0.2 }} />
             <List
                 sx={{
-                    height: "300px",
+                    height: "250px",
                     width: "100%",
                     display: "flex",
                     flexDirection: "column",
                     flexWrap: "wrap",
-                    alignItems: "center",
+                    margin: "10px",
                 }}
             >
-                {DISTRICT_SELECT.map((district, i) => {
+                {DISTRICT_SELECT.map((districtName, i) => {
                     return (
-                        <ListItem key={i} sx={{ width: "15%", padding: 0, height: "45px" }}>
-                            <ListItemButton sx={{ padding: 0, margin: 0, justifyContent: "flex-start" }}>
-                                <Checkbox />
-                                <ListItemText primary={district} />
-                            </ListItemButton>
+                        <ListItem key={i} sx={{ width: "15%", height: "35px", color: "#7F8295" }}>
+                            <Checkbox
+                                value={districtName}
+                                checked={district.includes(districtName)}
+                                onChange={handleCheckBox}
+                                sx={{
+                                    justifyContent: "flex-start",
+                                    color: "#AEB2C6",
+                                    "&.Mui-checked": {
+                                        color: "#FD5B73",
+                                    },
+                                }}
+                            />
+                            <ListItemText primary={districtName} />
                         </ListItem>
                     );
                 })}

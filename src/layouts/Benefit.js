@@ -10,7 +10,6 @@ import arrow from "../img/arrow.png";
 import homeIcon from "../img/homeIcon.png";
 
 import FilterBox from "../component/benefit/FilterBox";
-import SelectBox2 from "../component/benefit/SelectBox2";
 import BenefitList from "../component/benefit/BenefitList";
 import Loading from "../component/Loading";
 
@@ -18,8 +17,8 @@ function Benefit() {
     const CITY = "서울특별시";
     const [loading, setLoading] = useState(true);
     const [benefits, setBenefits] = useState([]);
-    const [type, setType] = useState("");
-    const [district, setDistrict] = useState("서울 전체");
+    const [type, setType] = useState([]);
+    const [district, setDistrict] = useState(["서울 전체"]);
     const [currentPage, setCurrentPage] = useState(1);
     const benefitsPerPage = 15;
 
@@ -38,8 +37,8 @@ function Benefit() {
     }, []);
 
     const filteredBenefits = benefits.filter((benefit) => {
-        const matchesFilter = type === "" || benefit.type === type;
-        const matchesDistrict = district === "서울 전체" || benefit.district === district;
+        const matchesFilter = type.length === 0 || type.includes(benefit.type);
+        const matchesDistrict = district.includes("서울 전체") || district.includes(benefit.district);
         return matchesFilter && matchesDistrict;
     });
 
