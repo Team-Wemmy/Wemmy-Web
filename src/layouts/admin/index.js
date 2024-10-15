@@ -1,12 +1,10 @@
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 function Admin() {
     return (
-        <Container>
-            <div>
-                <h1>Main</h1>
-            </div>
-        </Container>
+        <Box sx={{ flex: 3 }}>
+            <h1>Main</h1>
+        </Box>
     );
 }
 

@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { Drawer, Box, List, ListItem, ListItemButton, ListItemText, CssBaseline, Divider } from "@mui/material";
-import logo from "../../img/logo-bg-none.png";
+import { Drawer, Box, List, ListItem, ListItemButton, ListItemText, Collapse, Divider } from "@mui/material";
+import admin_logo from "../../img/wemmy_admin.png";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
 
 function Sidebar() {
+    const [open, setOpen] = useState(false);
     const getLinkStyle = ({ isActive }) => {
         return {
             width: "240px",
@@ -11,33 +15,63 @@ function Sidebar() {
         };
     };
 
+    const handleToggle = () => {
+        setOpen(!open);
+    };
+
     const SidebarList = (
-        <Box sx={{ width: 240 }} role="presentation">
-            <NavLink to={"/admin"} style={{ textDecoration: "none", color: "#000" }}>
-                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <h1 style={{ textAlign: "center" }}>
-                        <img src={logo} alt="" width="30px" style={{ marginRight: "10px" }} />
-                        Wemmy
-                    </h1>
-                    <p style={{ marginBottom: "0px", color: "rgb(0,0,0,0.4)" }}>admin</p>
-                </div>
+        <Box
+            sx={{
+                width: "240px",
+                flex: 1,
+                padding: "24px",
+                backgroundColor: "#fff",
+                height: "100vh",
+                border: "none",
+            }}
+            role="presentation"
+        >
+            <NavLink
+                to={"/admin"}
+                style={{
+                    color: "#000",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "35px",
+                }}
+            >
+                <img src={admin_logo} alt="" width="200px" />
             </NavLink>
-            <CssBaseline />
-            <Divider />
             <List>
                 <ListItem disablePadding>
-                    <NavLink to="/admin/benefit-list" style={getLinkStyle}>
-                        <ListItemButton sx={{ textAlign: "center" }}>
-                            <ListItemText primary="혜택 관리" />
+                    <NavLink to="/admin/apply" style={getLinkStyle}>
+                        <ListItemButton>
+                            <ListItemText primary="대시보드" />
                         </ListItemButton>
                     </NavLink>
                 </ListItem>
                 <ListItem disablePadding>
-                    <NavLink to="/admin/apply" style={getLinkStyle}>
-                        <ListItemButton sx={{ textAlign: "center" }}>
-                            <ListItemText primary="신청 목록" />
+                    <ListItemButton onClick={handleToggle}>
+                        <ListItemText primary="신청 현황" />
+                        {open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                </ListItem>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItemButton>
+                            <ListItemText primary="혜택 신청 현황" />
                         </ListItemButton>
-                    </NavLink>
+                        <ListItemButton>
+                            <ListItemText primary="프로그램 신청 현황" />
+                        </ListItemButton>
+                    </List>
+                </Collapse>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemText primary="등록" />
+                        <ExpandMore />
+                    </ListItemButton>
                 </ListItem>
             </List>
         </Box>
@@ -45,7 +79,15 @@ function Sidebar() {
 
     return (
         <div>
-            <Drawer variant="permanent" open>
+            <Drawer
+                variant="permanent"
+                sx={{
+                    "& .MuiDrawer-paper": {
+                        border: "none",
+                    },
+                }}
+                open
+            >
                 {SidebarList}
             </Drawer>
         </div>
