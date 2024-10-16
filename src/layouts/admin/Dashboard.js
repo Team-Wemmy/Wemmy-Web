@@ -12,10 +12,10 @@ const rows = [
     createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-function Apply() {
+function Dashboard() {
     return (
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-            <h1>신청 정보</h1>
+            <h1>List</h1>
             <TableContainer sx={{ display: "flex", justifyContent: "center" }}>
                 <Table sx={{ minWidth: 650, maxWidth: 1000 }} aria-label="simple table">
                     <TableHead>
@@ -46,4 +46,4 @@ function Apply() {
     );
 }
 
-export default Apply;
+export default Dashboard;

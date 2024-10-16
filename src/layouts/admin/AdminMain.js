@@ -92,7 +92,7 @@ function AdminMain() {
                     width: "100%",
                     height: "100%",
                     marginLeft: "288px",
-                    backgroundColor: "#f5f5f5",
+                    backgroundColor: "#F1F2F6",
                 }}
             >
                 <Outlet />

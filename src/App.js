@@ -6,10 +6,14 @@ import Place from "./layouts/Place";
 import Introduce from "./layouts/Introduce";
 import AdminMain from "./layouts/admin/AdminMain";
 import Admin from "./layouts/admin/index";
-import BenefitsList from "./layouts/admin/BenefitsList";
-import Apply from "./layouts/admin/Apply";
+import Dashboard from "./layouts/admin/Dashboard";
+
 import ScrollToTop from "./component/ScrollToTop";
 import "./css/App.css";
+import BenefitStatus from "./layouts/admin/BenefitStatus";
+import ProgramStatus from "./layouts/admin/ProgramStatus";
+import BenefitRegist from "./layouts/admin/BenefitRegist";
+import ProgramRegist from "./layouts/admin/ProgramRegist";
 
 function App() {
     return (
@@ -24,8 +28,11 @@ function App() {
                 </Route>
                 <Route path="admin" element={<AdminMain />}>
                     <Route index element={<Admin />} />
-                    <Route path="benefit-list" element={<BenefitsList />} />
-                    <Route path="apply" element={<Apply />} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="benefit-status" element={<BenefitStatus />} />
+                    <Route path="program-status" element={<ProgramStatus />} />
+                    <Route path="benefit-regist" element={<BenefitRegist />} />
+                    <Route path="program-regist" element={<ProgramRegist />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -4,10 +4,11 @@ import admin_logo from "../../img/wemmy_admin.png";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 
 function Sidebar() {
-    const [open, setOpen] = useState(false);
-    const getLinkStyle = ({ isActive }) => {
+    const [open, setOpen] = useState([false, false]);
+    const getLinkStyle = () => {
         return {
             width: "240px",
             textDecoration: "none",
@@ -15,9 +16,23 @@ function Sidebar() {
         };
     };
 
-    const handleToggle = () => {
-        setOpen(!open);
+    const handleToggle = (i) => {
+        const o = { ...open };
+        o[i] = !o[i];
+        setOpen(o);
     };
+
+    const StyledNavLink = styled(NavLink)(() => ({
+        padding: "10px",
+        color: "#000",
+        textDecoration: "none",
+        "&.active": {
+            color: "#fc5a73",
+        },
+        "@media (max-width: 550px)": {
+            display: "none",
+        },
+    }));
 
     const SidebarList = (
         <Box
@@ -45,34 +60,36 @@ function Sidebar() {
             </NavLink>
             <List>
                 <ListItem disablePadding>
-                    <NavLink to="/admin/apply" style={getLinkStyle}>
+                    <NavLink to="/admin/dashboard" style={getLinkStyle}>
                         <ListItemButton>
                             <ListItemText primary="대시보드" />
                         </ListItemButton>
                     </NavLink>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={handleToggle}>
+                    <ListItemButton onClick={() => handleToggle(0)}>
                         <ListItemText primary="신청 현황" />
-                        {open ? <ExpandLess /> : <ExpandMore />}
+                        {open[0] ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                 </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItemButton>
-                            <ListItemText primary="혜택 신청 현황" />
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItemText primary="프로그램 신청 현황" />
-                        </ListItemButton>
+                <Collapse in={open[0]} timeout="auto" unmountOnExit sx={{ marginLeft: "30px" }}>
+                    <List component="div" disablePadding sx={{ display: "flex", flexDirection: "column" }}>
+                        <StyledNavLink to="/admin/benefit-status">혜택 신청 현황</StyledNavLink>
+                        <StyledNavLink to="/admin/program-status">프로그램 신청 현황</StyledNavLink>
                     </List>
                 </Collapse>
                 <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton onClick={() => handleToggle(1)}>
                         <ListItemText primary="등록" />
-                        <ExpandMore />
+                        {open[1] ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                 </ListItem>
+                <Collapse in={open[1]} timeout="auto" unmountOnExit sx={{ marginLeft: "30px" }}>
+                    <List component="div" disablePadding sx={{ display: "flex", flexDirection: "column" }}>
+                        <StyledNavLink to="/admin/benefit-regist">혜택 등록</StyledNavLink>
+                        <StyledNavLink to="/admin/program-regist">프로그램 등록</StyledNavLink>
+                    </List>
+                </Collapse>
             </List>
         </Box>
     );
