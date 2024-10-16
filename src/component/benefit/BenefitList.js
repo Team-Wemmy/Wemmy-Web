@@ -6,7 +6,18 @@ import Box from "@mui/material/Box";
 
 import { Typography } from "@mui/material";
 
-function List({ title, type, imageUrl, group }) {
+function List({ title, type, imageUrl, group, application, training }) {
+    const today = new Date();
+
+    let endDateString = "";
+    if (application) {
+        endDateString = application.split("~")[1]?.trim() || ""; // 안전하게 접근
+    }
+
+    const endDate = new Date(endDateString);
+    const differenceInTime = endDate - today;
+    const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
     return (
         <>
             <Box
@@ -19,6 +30,7 @@ function List({ title, type, imageUrl, group }) {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "start",
+                    backgroundColor: differenceInDays > 0 ? "#E4E5ED" : "",
                 }}
             >
                 <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
@@ -31,7 +43,13 @@ function List({ title, type, imageUrl, group }) {
                             fontSize: "12px",
                         }}
                     >
-                        마감임박 D-3🔥
+                        {application === ""
+                            ? "상시 신청"
+                            : differenceInDays === 0
+                            ? "마감 임박🔥"
+                            : differenceInDays > 0
+                            ? "마감"
+                            : "마감 D" + differenceInDays}
                     </Typography>
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                         <Typography
@@ -97,7 +115,9 @@ function List({ title, type, imageUrl, group }) {
                     </Box>
                 </Box>
                 <Box sx={{ marginLeft: "3px" }}>
-                    <Typography sx={{ color: "#7F8295", fontSize: "11px" }}>상시 신청</Typography>
+                    <Typography sx={{ color: "#7F8295", fontSize: "12px" }}>
+                        {application === "" ? "상시 신청" : application}
+                    </Typography>
                 </Box>
             </Box>
         </>

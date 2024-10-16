@@ -93,6 +93,8 @@ function Benefit() {
                                         district={benefit.district}
                                         imageUrl={benefit.imageUrl}
                                         type={benefit.type}
+                                        application={benefit.aplicationPeriod}
+                                        training={benefit.trainingPeriod}
                                     />
                                 </Grid>
                             ))}
