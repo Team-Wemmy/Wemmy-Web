@@ -30,7 +30,8 @@ function List({ title, type, imageUrl, group, application, training }) {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "start",
-                    backgroundColor: differenceInDays > 0 ? "#E4E5ED" : "",
+                    opacity: differenceInDays > 0 ? 0.7 : 1,
+                    backgroundColor: differenceInDays > 0 ? "#eee" : "",
                 }}
             >
                 <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>

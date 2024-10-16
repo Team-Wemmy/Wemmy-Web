@@ -80,7 +80,7 @@ function Benefit() {
                     maxWidth="lg"
                     spacing={{ xs: 1, md: 3 }}
                     columns={{ xs: 2, sm: 10, md: 15 }}
-                    style={{ marginTop: 50, display: "flex", justifyContent: "space-between" }}
+                    style={{ marginTop: 50, display: "flex", justifyContent: "flex-start" }}
                 >
                     {loading ? (
                         <Loading />
