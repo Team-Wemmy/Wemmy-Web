@@ -28,6 +28,30 @@ function ProgramStatus() {
             address: "서울특별시 금천구 금하로24길 6 102호",
             imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
         },
+        {
+            title: "임산부 숲 태교 교실 (주말, 10월)",
+            city: "금천구",
+            type: "임신",
+            group: "프로그램",
+            day: "2024.10.04",
+            name: "김페르",
+            tel: "010-1234-5678",
+            email: "asd123@gmail.com",
+            address: "서울특별시 금천구 금하로24길 6 101호",
+            imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
+        },
+        {
+            title: "임산부 숲 태교 교실 (주말, 10월)",
+            city: "금천구",
+            type: "임신",
+            group: "프로그램",
+            day: "2024.10.05",
+            name: "유소나",
+            tel: "010-4321-8765",
+            email: "qwe123@gmail.com",
+            address: "서울특별시 금천구 금하로24길 6 102호",
+            imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
+        },
     ];
 
     const labelStyle = {
@@ -40,11 +64,11 @@ function ProgramStatus() {
         marginRight: "5px",
     };
     return (
-        <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3, marginTop: "120px" }}>
+        <Box sx={{ marginTop: "120px", paddingLeft: "230px" }}>
             <Typography sx={{ fontSize: "30px", marginLeft: "20px", marginBottom: "15px" }}>
                 <strong>프로그램 신청 현황</strong>
             </Typography>
-            <List sx={{ width: "100vh" }}>
+            <List sx={{ width: "100vh", overflow: "auto", height: "80vh" }}>
                 {PROGRAM_STATUS.map((p, i) => (
                     <ListItem key={i}>
                         <Box
