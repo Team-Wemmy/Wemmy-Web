@@ -1,18 +1,18 @@
 import React from "react";
 
 import styled from "styled-components";
-import logo_bgx from "../../img/logo-bg-none.png";
 import google from "../../img/google.png";
 import apple from "../../img/apple.png";
+import landing from "../../img/Wemmy_Landing.png";
 
 import AppBtn from "./AppBtn";
 
 function Section1() {
     return (
         <React.Fragment>
-            <section style={{ display: "block", backgroundColor: "#fff7f8" }}>
-                <Div1 style={{ background: "#fff7f8" }}>
-                    <div>
+            <SECTION1>
+                <Div1>
+                    <TEXTDIV>
                         <H1>
                             임신 & 육아
                             <br />
@@ -24,45 +24,46 @@ function Section1() {
                             위미에서 놓치지 마세요!
                         </P>
                         <div style={{ display: "flex", flexDirection: "row", marginTop: "40px" }}>
-                            <AppBtn text="App Store" image={apple} backgroundColor="#FF7F92" />
-                            <AppBtn text="Google Play" image={google} backgroundColor="#FF7F92" />
+                            <AppBtn text="App Store" image={apple} backgroundColor="rgba(255, 255, 255, 0.2)" />
+                            <AppBtn text="Google Play" image={google} backgroundColor="rgba(255, 255, 255, 0.2)" />
                         </div>
-                    </div>
-                    <Image1 />
+                    </TEXTDIV>
                 </Div1>
-            </section>
+            </SECTION1>
         </React.Fragment>
     );
 }
 
 export default Section1;
 
-const Div1 = styled.div`
-    width: 1600px;
-    height: 1000px;
-    position: relative;
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 200px;
-    padding-bottom: 80px;
+const SECTION1 = styled.section`
+    display: block;
+    background-image: url(${landing});
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1800px;
 `;
 
-const H1 = styled.h1`
-    font-size: 2.9rem;
-    color: #2f3238;
+const Div1 = styled.div`
+    width: 100vh;
+    height: 1600px;
+    position: relative;
+    display: flex;
+`;
+const TEXTDIV = styled.div`
+    margin-top: 280px;
+    margin-left: 150px;
+`;
+
+const H1 = styled.p`
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
     margin-bottom: 40px;
 `;
 
 const P = styled.p`
     font-size: 20px;
     margin: 0px 5px;
-    color: #7f8295;
-`;
-
-const Image1 = styled.div`
-    width: 713px;
-    height: 650px;
-    background-image: url(${logo_bgx});
-    background-size: cover;
-    margin-top: 150px;
+    color: white;
 `;

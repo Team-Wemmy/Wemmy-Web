@@ -4,10 +4,10 @@ function AppBtn({ text, image, backgroundColor }) {
     const [isActive, setIsActive] = useState(false);
 
     const getFontColor = (backgroundColor) => {
-        if (backgroundColor === "#E4E5ED") {
+        if (backgroundColor === "rgba(228,229,237,1)") {
             return "#303239";
-        } else if (backgroundColor === "#FF7F92") {
-            return "white";
+        } else if (backgroundColor === "rgba(255, 255, 255, 0.2)") {
+            return "#FFFFFF";
         }
     };
 
@@ -28,7 +28,7 @@ function AppBtn({ text, image, backgroundColor }) {
             style={{
                 height: "50px",
                 width: "190px",
-                backgroundColor: isActive ? "#D0D3E1" : backgroundColor,
+                background: isActive ? "#D0D3E1" : backgroundColor,
                 color: fontColor,
                 fontSize: "16px",
                 display: "flex",

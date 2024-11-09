@@ -13,7 +13,7 @@ function Section3() {
                     display: "block",
                 }}
             >
-                <DIV2 style={{ backgroundColor: "#FFF8DC" }}>
+                <DIV2 style={{ backgroundColor: "#FFE7EA" }}>
                     <Image2 />
                     <div>
                         <div>

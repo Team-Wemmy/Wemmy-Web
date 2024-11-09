@@ -47,8 +47,8 @@ function Footer() {
                     Wemmy 앱 다운로드
                 </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row" }}>
-                    <AppBtn text="App Store" image={apple} backgroundColor="#E4E5ED" />
-                    <AppBtn text="Google Play" image={google} backgroundColor="#E4E5ED" />
+                    <AppBtn text="App Store" image={apple} backgroundColor="rgba(228,229,237,1)" />
+                    <AppBtn text="Google Play" image={google} backgroundColor="rgba(228,229,237,1)" />
                 </Box>
             </Box>
         </Box>
