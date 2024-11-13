@@ -7,7 +7,8 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 
 function Sidebar() {
-    const [open, setOpen] = useState([false, false]);
+    const [open, setOpen] = useState([true, false]);
+
     const getLinkStyle = () => {
         return {
             width: "240px",
@@ -17,9 +18,9 @@ function Sidebar() {
     };
 
     const handleToggle = (i) => {
-        const o = { ...open };
-        o[i] = !o[i];
-        setOpen(o);
+        const newOpen = [...open]; // 상태를 복사한 후
+        newOpen[i] = !newOpen[i]; // 해당 인덱스의 값을 토글
+        setOpen(newOpen); // 업데이트
     };
 
     const StyledNavLink = styled(NavLink)(() => ({

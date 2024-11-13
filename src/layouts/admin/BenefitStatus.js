@@ -3,7 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import wemmyLogo from "../../img/wemmy_logo.png";
+import guro from "../../img/guro-gu.png";
 
 function BenefitStatus() {
     const [register, setRegister] = useState([]);
@@ -17,6 +17,7 @@ function BenefitStatus() {
                         Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
                     },
                 });
+                // group이 "program"인 데이터만 필터링
                 const programData = resp.data.filter((item) => item.group === "benefit");
                 console.log("Fetched program data:", programData);
                 setRegister(programData);
@@ -70,7 +71,7 @@ function BenefitStatus() {
                                             }}
                                         >
                                             <img
-                                                src={wemmyLogo}
+                                                src={guro}
                                                 alt={item.title}
                                                 style={{
                                                     border: "1px solid #ddd",
