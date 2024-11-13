@@ -41,7 +41,9 @@ const SECTION1 = styled.section`
     background-image: url(${landing});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 1800px;
+    background-position: center;
+    width: 100%;
+    height: 1800px;
 `;
 
 const Div1 = styled.div`
