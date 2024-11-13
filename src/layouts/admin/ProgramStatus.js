@@ -1,75 +1,99 @@
 import { Box, Typography, List, IconButton, ListItem } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function ProgramStatus() {
-    const PROGRAM_STATUS = [
-        {
-            title: "임산부 숲 태교 교실 (주말, 10월)",
-            city: "금천구",
-            type: "임신",
-            group: "프로그램",
-            day: "2024.10.04",
-            name: "김페르",
-            tel: "010-1234-5678",
-            email: "asd123@gmail.com",
-            address: "서울특별시 금천구 금하로24길 6 101호",
-            imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
-        },
-        {
-            title: "임산부 숲 태교 교실 (주말, 10월)",
-            city: "금천구",
-            type: "임신",
-            group: "프로그램",
-            day: "2024.10.05",
-            name: "유소나",
-            tel: "010-4321-8765",
-            email: "qwe123@gmail.com",
-            address: "서울특별시 금천구 금하로24길 6 102호",
-            imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
-        },
-        {
-            title: "임산부 숲 태교 교실 (주말, 10월)",
-            city: "금천구",
-            type: "임신",
-            group: "프로그램",
-            day: "2024.10.04",
-            name: "김페르",
-            tel: "010-1234-5678",
-            email: "asd123@gmail.com",
-            address: "서울특별시 금천구 금하로24길 6 101호",
-            imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
-        },
-        {
-            title: "임산부 숲 태교 교실 (주말, 10월)",
-            city: "금천구",
-            type: "임신",
-            group: "프로그램",
-            day: "2024.10.05",
-            name: "유소나",
-            tel: "010-4321-8765",
-            email: "qwe123@gmail.com",
-            address: "서울특별시 금천구 금하로24길 6 102호",
-            imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
-        },
-    ];
+    // const PROGRAM_STATUS = [
+    //     {
+    //         title: "임산부 숲 태교 교실 (주말, 10월)",
+    //         city: "금천구",
+    //         type: "임신",
+    //         group: "프로그램",
+    //         day: "2024.10.04",
+    //         name: "김페르",
+    //         tel: "010-1234-5678",
+    //         email: "asd123@gmail.com",
+    //         address: "서울특별시 금천구 금하로24길 6 101호",
+    //         imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
+    //     },
+    //     {
+    //         title: "임산부 숲 태교 교실 (주말, 10월)",
+    //         city: "금천구",
+    //         type: "임신",
+    //         group: "프로그램",
+    //         day: "2024.10.05",
+    //         name: "유소나",
+    //         tel: "010-4321-8765",
+    //         email: "qwe123@gmail.com",
+    //         address: "서울특별시 금천구 금하로24길 6 102호",
+    //         imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
+    //     },
+    //     {
+    //         title: "임산부 숲 태교 교실 (주말, 10월)",
+    //         city: "금천구",
+    //         type: "임신",
+    //         group: "프로그램",
+    //         day: "2024.10.04",
+    //         name: "김페르",
+    //         tel: "010-1234-5678",
+    //         email: "asd123@gmail.com",
+    //         address: "서울특별시 금천구 금하로24길 6 101호",
+    //         imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
+    //     },
+    //     {
+    //         title: "임산부 숲 태교 교실 (주말, 10월)",
+    //         city: "금천구",
+    //         type: "임신",
+    //         group: "프로그램",
+    //         day: "2024.10.05",
+    //         name: "유소나",
+    //         tel: "010-4321-8765",
+    //         email: "qwe123@gmail.com",
+    //         address: "서울특별시 금천구 금하로24길 6 102호",
+    //         imgUrl: "https://github.com/Team-Wemmy/Wemmy-City-Image/blob/main/geumcheon-gu.png?raw=true",
+    //     },
+    // ];
+    const [register, setRegister] = useState([]);
+    // const [loading, setLoading] = useState(true);
 
-    const labelStyle = {
-        height: "15px",
-        backgroundColor: "#FFF7F8",
-        color: "#FF8093",
-        padding: "2px 5px 0px 5px",
-        borderRadius: "3px",
-        fontSize: "10px",
-        marginRight: "5px",
-    };
+    useEffect(() => {
+        const fetchBenefit = async () => {
+            try {
+                const resp = await axios.get(`${process.env.REACT_APP_API_URL}/benefit/v2/register/list`, {
+                    headers: {
+                        Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
+                    },
+                });
+                // group이 "program"인 데이터만 필터링
+                const programData = resp.data.filter((item) => item.group === "program");
+                console.log("Fetched program data:", programData);
+                setRegister(programData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchBenefit();
+    }, []);
+
+    // const labelStyle = {
+    //     height: "15px",
+    //     backgroundColor: "#FFF7F8",
+    //     color: "#FF8093",
+    //     padding: "2px 5px 0px 5px",
+    //     borderRadius: "3px",
+    //     fontSize: "10px",
+    //     marginRight: "5px",
+    // };
     return (
         <Box sx={{ marginTop: "120px", paddingLeft: "230px" }}>
             <Typography sx={{ fontSize: "30px", marginLeft: "20px", marginBottom: "15px" }}>
                 <strong>프로그램 신청 현황</strong>
             </Typography>
             <List sx={{ width: "100vh", overflow: "auto", height: "80vh" }}>
-                {PROGRAM_STATUS.map((p, i) => (
+                {register.map((r, i) => (
                     <ListItem key={i}>
                         <Box
                             sx={{
@@ -89,8 +113,8 @@ function ProgramStatus() {
                                 }}
                             >
                                 <img
-                                    src={p.imgUrl}
-                                    alt={p.title}
+                                    src={r.imgUrl}
+                                    alt={r.data.title}
                                     style={{
                                         border: "1px solid #ddd",
                                         position: "relative",
@@ -103,7 +127,7 @@ function ProgramStatus() {
                                     }}
                                 />
                                 <Typography sx={{ flex: 2, marginLeft: "20px", fontSize: "20px" }}>
-                                    <strong>{p.title}</strong>
+                                    <strong>{r.data.title}</strong>
                                 </Typography>
                                 <Box
                                     sx={{
@@ -125,7 +149,7 @@ function ProgramStatus() {
                                                 marginRight: "5px",
                                             }}
                                         >
-                                            {p.type}
+                                            임신
                                         </Typography>
                                         <Typography
                                             sx={{
@@ -138,7 +162,7 @@ function ProgramStatus() {
                                                 marginRight: "5px",
                                             }}
                                         >
-                                            {p.group}
+                                            {r.group}
                                         </Typography>
                                         <Typography
                                             sx={{
@@ -150,7 +174,7 @@ function ProgramStatus() {
                                                 fontSize: "10px",
                                             }}
                                         >
-                                            {p.city}
+                                            {r.city}
                                         </Typography>
                                     </Box>
                                     <Typography
@@ -162,7 +186,7 @@ function ProgramStatus() {
                                             fontSize: "10px",
                                         }}
                                     >
-                                        {p.day}
+                                        {r.data.registerDate}
                                     </Typography>
                                 </Box>
                             </Box>
@@ -174,10 +198,10 @@ function ProgramStatus() {
                                     <Typography>주소</Typography>
                                 </Box>
                                 <Box sx={{ flex: 4 }}>
-                                    <Typography>{p.name}</Typography>
-                                    <Typography>{p.tel}</Typography>
-                                    <Typography>{p.email}</Typography>
-                                    <Typography>{p.address}</Typography>
+                                    <Typography>{r.data.name}</Typography>
+                                    <Typography>{r.data.phone}</Typography>
+                                    <Typography>{r.data.email}</Typography>
+                                    <Typography>{r.data.addressDetail}</Typography>
                                 </Box>
                                 <Box sx={{ alignSelf: "end" }}>
                                     <IconButton sx={{ width: "40px" }}>
