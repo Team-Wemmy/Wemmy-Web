@@ -17,7 +17,6 @@ function BenefitStatus() {
                         Authorization: `Bearer ${process.env.REACT_APP_ADMIN_TOKEN}`,
                     },
                 });
-                // group이 "program"인 데이터만 필터링
                 const programData = resp.data.filter((item) => item.group === "benefit");
                 console.log("Fetched program data:", programData);
                 setRegister(programData);
