@@ -16,6 +16,7 @@ import { MdLocalHospital } from "react-icons/md";
 import { MdHomeWork, MdPlace } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
 import { GoClockFill } from "react-icons/go";
+import MapControl from "./MapControl";
 
 function KakaoMap() {
     const [category, setCategory] = useState(null);
@@ -187,29 +188,33 @@ function KakaoMap() {
                     <MdHomeWork color={category === "행정시설" ? "white" : "#FD5B73"} size={25} /> 행정 시설
                 </BTN>
             </DIV1>
-            <Map center={state.center} style={{ width: "1100px", height: "800px", margin: "13px 50px" }} level={3}>
-                {!state.isLoading && (
-                    <MapMarker
-                        image={{ src: geoMarker, size: { width: 30, height: 30 } }}
-                        position={state.center}
-                    ></MapMarker>
-                )}
-                {filteredPositions.map((position) => (
-                    <EventMarkerContainer
-                        style={{ border: "tranparent" }}
-                        key={`${position.title}-${position.latlng}`}
-                        position={position.latlng}
-                        img={position.img}
-                        title={position.title}
-                        category={position.category}
-                        tel={position.tel}
-                        address={position.address}
-                    />
-                ))}
-            </Map>
-            <ControlBox>
-                <ControlBtn />
-            </ControlBox>
+            <div>
+                <Map
+                    center={state.center}
+                    style={{ width: "1100px", height: "800px", margin: "13px 50px", position: "relative" }}
+                    level={1}
+                >
+                    {!state.isLoading && (
+                        <MapMarker
+                            image={{ src: geoMarker, size: { width: 30, height: 30 } }}
+                            position={state.center}
+                        ></MapMarker>
+                    )}
+                    {filteredPositions.map((position) => (
+                        <EventMarkerContainer
+                            style={{ border: "tranparent" }}
+                            key={`${position.title}-${position.latlng}`}
+                            position={position.latlng}
+                            img={position.img}
+                            title={position.title}
+                            category={position.category}
+                            tel={position.tel}
+                            address={position.address}
+                        />
+                    ))}
+                    <MapControl />
+                </Map>
+            </div>
         </>
     );
 }
@@ -267,27 +272,4 @@ const InfoSmallText = styled.p`
     font-size: 11px;
     color: #7f8295;
     margin: 7px 0 0 10px;
-`;
-
-const ControlBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    padding: 10px;
-`;
-
-const ControlBtn = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 2px;
-    width: 45px;
-    height: 45px;
-    background-color: white;
-    box-shadow: 8px;
 `;
