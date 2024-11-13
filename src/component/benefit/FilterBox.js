@@ -1,22 +1,27 @@
-// src/component/benefit/Selectbox1.js
-
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-
 import SearchIcon from "@mui/icons-material/Search";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { useState } from "react";
 import DistrictFilter from "./DistrictFilter";
 import TypeFilter from "./TypeFilter";
 
-function FilterBox({ type, setType, district, setDistrict }) {
+function FilterBox({ type, setType, district, setDistrict, onSearch }) {
     const FILTER_SELECT = ["지역 선택", "분야 선택"];
-
     const [activeBox, setActiveBox] = useState(null);
+
+    // 로컬 상태로 필터 값 관리
+    const [localType, setLocalType] = useState(type);
+    const [localDistrict, setLocalDistrict] = useState(district);
 
     const handleFilterClick = (index) => {
         setActiveBox(activeBox === index ? null : index);
+    };
+
+    // 검색 버튼 클릭 시 필터 적용
+    const handleSearchClick = () => {
+        onSearch({ type: localType, district: localDistrict });
     };
 
     return (
@@ -33,6 +38,7 @@ function FilterBox({ type, setType, district, setDistrict }) {
                     {FILTER_SELECT.map((filter, idx) => {
                         return (
                             <ListItem
+                                key={idx} // key 추가
                                 sx={{
                                     width: "350px",
                                     height: "60px",
@@ -40,7 +46,6 @@ function FilterBox({ type, setType, district, setDistrict }) {
                                 }}
                             >
                                 <Button
-                                    key={idx}
                                     onClick={() => handleFilterClick(idx)}
                                     sx={{
                                         width: "100%",
@@ -84,6 +89,7 @@ function FilterBox({ type, setType, district, setDistrict }) {
                 </Box>
                 <Button
                     variant="outlined"
+                    onClick={handleSearchClick} // 검색 버튼 클릭 시 실행
                     sx={{
                         width: "250px",
                         height: "60px",
@@ -104,8 +110,8 @@ function FilterBox({ type, setType, district, setDistrict }) {
                     <SearchIcon sx={{ marginLeft: "7px" }} />
                 </Button>
             </List>
-            {activeBox === 0 && <DistrictFilter district={district} setDistrict={setDistrict} />}
-            {activeBox === 1 && <TypeFilter type={type} setType={setType} />}
+            {activeBox === 0 && <DistrictFilter district={localDistrict} setDistrict={setLocalDistrict} />}
+            {activeBox === 1 && <TypeFilter type={localType} setType={setLocalType} />}
         </Box>
     );
 }
